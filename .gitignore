@@ -5,6 +5,8 @@
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store
+/gradle
 /build
+/app/build
 /captures
 gradle.properties
