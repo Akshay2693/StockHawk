@@ -138,7 +138,7 @@ public class StockTaskService extends GcmTaskService {
 
                     //for past 30 days data
                     if (historicaldata != null) {
-                        mContext.getContentResolver().delete(QuoteProvider.HISTORY.CONTENT_URI,null,null);
+                        mContext.getContentResolver().delete(QuoteProvider.HISTORY.CONTENT_URI, null, null);
                         mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY, Utils.quoteJsonToContentValsPast(historicaldata));
                     }
 

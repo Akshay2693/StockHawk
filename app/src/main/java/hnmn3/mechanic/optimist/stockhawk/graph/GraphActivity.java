@@ -1,19 +1,23 @@
 package hnmn3.mechanic.optimist.stockhawk.graph;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.FillFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
@@ -31,14 +35,25 @@ public class GraphActivity extends FragmentActivity {
     String dates[];
     float close[];
     Intent intentReceived;
+    private CustomMarkerView markerView;
+    private ArrayList<GraphPoint> graphPoints = new ArrayList<>();
+    LineDataSet set1 = new LineDataSet(new ArrayList<Entry>(),"Values");
+    TextView tvSymbol,tvDate,tvOpen,tvClose,tvHigh,tvLow;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_line_graph);
+        tvSymbol = (TextView) findViewById(R.id.tvSymbol);
+        tvDate = (TextView) findViewById(R.id.tvDate);
+        tvOpen = (TextView) findViewById(R.id.tvOpen);
+        tvClose = (TextView) findViewById(R.id.tvClose);
+        tvHigh = (TextView) findViewById(R.id.tvHigh);
+        tvLow = (TextView) findViewById(R.id.tvLow);
         intentReceived = getIntent();
-        Toast.makeText(GraphActivity.this, intentReceived.getStringExtra("stock_symbol"), Toast.LENGTH_SHORT).show();
+        tvSymbol.setText(intentReceived.getStringExtra("stock_symbol"));
 
         mChart = (LineChart) findViewById(R.id.chart1);
         mChart.setViewPortOffsets(20, 20 , 20, 20);
@@ -68,8 +83,8 @@ public class GraphActivity extends FragmentActivity {
 
         mChart.getAxisRight().setEnabled(false);
 
+        //getting data from DB and setting data for graph
         getData();
-        // add data
         setData(dates,close);
 
         mChart.getLegend().setEnabled(false);
@@ -84,8 +99,12 @@ public class GraphActivity extends FragmentActivity {
             LineDataSet set = (LineDataSet) iSet;
             set.setMode(LineDataSet.Mode.LINEAR);
             set.setDrawCircles(true);
-            set.setDrawValues(true);
+            set.setDrawValues(false);
         }
+
+        // add MarkerView to show each Graph point details
+        markerView = new CustomMarkerView(this,R.layout.markerview_layout);
+        mChart.setMarkerView(markerView);
 
         mChart.invalidate();
     }
@@ -102,9 +121,18 @@ public class GraphActivity extends FragmentActivity {
             close = new float[count];
             dates = new String[count];
             int i=0;
+            GraphPoint graphPoint;
             do{
                 close[i] = Float.parseFloat(c.getString(c.getColumnIndex(HistoryColumns.Close)));
                 dates[i] = c.getString(c.getColumnIndex(HistoryColumns.Date));
+                String symbol = c.getString(1);
+                String Date = c.getString(2);
+                String Open = c.getString(3);
+                String High = c.getString(4);
+                String Low = c.getString(5);
+                String Close = c.getString(6);
+                graphPoint = new GraphPoint(symbol,Date,Open,High,Low,Close);
+                graphPoints.add(graphPoint);
                 i++;
             }while(c.moveToNext());
         }else{
@@ -116,7 +144,8 @@ public class GraphActivity extends FragmentActivity {
 
     private void setData(String[] dates, float[] yAxisValues) {
 
-        ArrayList<Entry> yVals = new ArrayList<Entry>();
+        //ArrayList<Entry> yVals = new ArrayList<Entry>();
+        LineDataSet yVals = new LineDataSet(new ArrayList<Entry>(),"Values");
 
         int len=0;
         if(yAxisValues!=null)
@@ -126,12 +155,8 @@ public class GraphActivity extends FragmentActivity {
             return;
         }
         for (int i = 0; i < len; i++) {
-            yVals.add(new Entry(yAxisValues[i], i));
+            set1.addEntry(new Entry(yAxisValues[i], i,graphPoints.get(i)));
         }
-
-        LineDataSet set1;
-        // create a dataset and give it a type
-        set1 = new LineDataSet(yVals, "DataSet 1");
 
         set1.setDrawCubic(true);
         set1.setCubicIntensity(0.2f);
@@ -140,7 +165,7 @@ public class GraphActivity extends FragmentActivity {
         set1.setLineWidth(1.8f);
         set1.setCircleRadius(4f);
         set1.setCircleColor(Color.WHITE);
-        set1.setHighLightColor(Color.rgb(244, 117, 117));
+        set1.setHighLightColor(Color.WHITE);
         set1.setColor(Color.WHITE);
         set1.setFillColor(Color.WHITE);
         set1.setFillAlpha(100);
@@ -164,6 +189,32 @@ public class GraphActivity extends FragmentActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
+    }
+
+    private class CustomMarkerView extends MarkerView {
+        public CustomMarkerView(Context context, int layoutResource) {
+            super(context, layoutResource);
+        }
+
+        @Override
+        public void refreshContent(Entry e, Highlight highlight) {
+            GraphPoint graphPoint = (GraphPoint) e.getData();
+            tvClose.setText(graphPoint.getClose());
+            tvDate.setText(graphPoint.getDate());
+            tvHigh.setText(graphPoint.getHigh());
+            tvLow.setText(graphPoint.getLow());
+            tvOpen.setText(graphPoint.getOpen());
+        }
+
+        @Override
+        public int getXOffset(float xpos) {
+            return 0;
+        }
+
+        @Override
+        public int getYOffset(float ypos) {
+            return 0;
+        }
     }
 
 }
