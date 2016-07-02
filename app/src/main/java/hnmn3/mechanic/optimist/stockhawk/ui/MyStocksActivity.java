@@ -1,6 +1,7 @@
 package hnmn3.mechanic.optimist.stockhawk.ui;
 
 import android.app.LoaderManager;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -27,16 +28,16 @@ import com.google.android.gms.gcm.PeriodicTask;
 import com.google.android.gms.gcm.Task;
 import com.melnykov.fab.FloatingActionButton;
 
+import hnmn3.mechanic.optimist.stockhawk.R;
+import hnmn3.mechanic.optimist.stockhawk.data.HistoryColumns;
 import hnmn3.mechanic.optimist.stockhawk.data.QuoteColumns;
-import hnmn3.mechanic.optimist.stockhawk.rest.RecyclerViewItemClickListener;
 import hnmn3.mechanic.optimist.stockhawk.data.QuoteProvider;
 import hnmn3.mechanic.optimist.stockhawk.rest.QuoteCursorAdapter;
+import hnmn3.mechanic.optimist.stockhawk.rest.RecyclerViewItemClickListener;
 import hnmn3.mechanic.optimist.stockhawk.rest.Utils;
 import hnmn3.mechanic.optimist.stockhawk.service.StockIntentService;
 import hnmn3.mechanic.optimist.stockhawk.service.StockTaskService;
 import hnmn3.mechanic.optimist.stockhawk.touch_helper.SimpleItemTouchHelperCallback;
-
-import hnmn3.mechanic.optimist.stockhawk.R;
 
 public class MyStocksActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
@@ -192,6 +193,16 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
 
     //noinspection SimplifiableIfStatement
     if (id == R.id.action_settings) {
+      ContentValues cv = new ContentValues();
+      cv.put(HistoryColumns.SYMBOL,"YOYO" );
+      /*cv.put(HistoryColumns.Adj_Close, );
+      cv.put(HistoryColumns.Close, );
+      cv.put(HistoryColumns.Date, );
+      cv.put(HistoryColumns.High, );
+      cv.put(HistoryColumns.Low, );
+      cv.put(HistoryColumns.Open, );
+      cv.put(HistoryColumns.Volume, );*/
+      mContext.getContentResolver().insert(QuoteProvider.HISTORY.CONTENT_URI,cv);
       return true;
     }
 

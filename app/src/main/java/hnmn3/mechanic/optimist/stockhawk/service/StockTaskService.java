@@ -18,6 +18,9 @@ import com.squareup.okhttp.Response;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import hnmn3.mechanic.optimist.stockhawk.data.QuoteColumns;
 import hnmn3.mechanic.optimist.stockhawk.data.QuoteProvider;
@@ -27,6 +30,7 @@ import hnmn3.mechanic.optimist.stockhawk.rest.Utils;
 public class StockTaskService extends GcmTaskService{
   private String LOG_TAG = StockTaskService.class.getSimpleName();
 
+  String todayDate,_30DaysBackDate;
   private OkHttpClient client = new OkHttpClient();
   private Context mContext;
   private StringBuilder mStoredSymbols = new StringBuilder();
@@ -104,13 +108,20 @@ public class StockTaskService extends GcmTaskService{
         + "org%2Falltableswithkeys&callback=");
 
     String urlString;
+    setupDates();
     String getResponse;
+
+    //for past 30 days data
+    String historicaldataUrl="http://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.historicaldata where symbol in ("+mStoredSymbols.toString()+" and startDate = \""+_30DaysBackDate+"\" and endDate = \""+todayDate+"\"&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys";
+    String historicaldata;
+
     int result = GcmNetworkManager.RESULT_FAILURE;
 
     if (urlStringBuilder != null){
       urlString = urlStringBuilder.toString();
       try{
         getResponse = fetchData(urlString);
+        historicaldata = fetchData(historicaldataUrl);
         result = GcmNetworkManager.RESULT_SUCCESS;
         try {
           ContentValues contentValues = new ContentValues();
@@ -122,6 +133,11 @@ public class StockTaskService extends GcmTaskService{
           }
           mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY,
               Utils.quoteJsonToContentVals(getResponse));
+
+          //for past 30 days data
+         // mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY,Utils.quoteJsonToContentValsPast(historicaldata));
+
+          //For
         }catch (RemoteException | OperationApplicationException e){
           Log.e(LOG_TAG, "Error applying batch insert", e);
         }catch(NumberFormatException e){
@@ -135,6 +151,14 @@ public class StockTaskService extends GcmTaskService{
     }
 
     return result;
+  }
+
+  public void setupDates(){
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd ");
+    Calendar cal = Calendar.getInstance();
+    todayDate = dateFormat.format(cal.getTime());
+    cal.add(Calendar.DATE, -30);
+    _30DaysBackDate = dateFormat.format(cal.getTime());
   }
 
 }

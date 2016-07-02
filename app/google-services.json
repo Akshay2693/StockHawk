@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "537484972912",
+    "project_id": "stockhark"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537484972912:android:426b7caaf1c05f18",
+        "android_client_info": {
+          "package_name": "hnmn3.mechanic.optimist.stockhawk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0osp5bqPU38aLZe5PeWDkZBD5dSDbIUU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

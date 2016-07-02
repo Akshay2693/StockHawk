@@ -49,6 +49,38 @@ public class Utils {
     return batchOperations;
   }
 
+  public static ArrayList<ContentProviderOperation> quoteJsonToContentValsPast(String historicaldata) {
+    ArrayList<ContentProviderOperation> batchOperations = new ArrayList<>();
+    JSONObject jsonObject = null;
+    JSONArray resultsArray = null;
+
+    try{
+      jsonObject = new JSONObject(historicaldata);
+      if (jsonObject != null && jsonObject.length() != 0){
+        jsonObject = jsonObject.getJSONObject("query");
+        int count = Integer.parseInt(jsonObject.getString("count"));
+        if (count == 1){
+          jsonObject = jsonObject.getJSONObject("results")
+                  .getJSONObject("quote");
+          batchOperations.add(buildBatchOperation(jsonObject));
+        } else{
+          resultsArray = jsonObject.getJSONObject("results").getJSONArray("quote");
+
+          if (resultsArray != null && resultsArray.length() != 0){
+            for (int i = 0; i < resultsArray.length(); i++){
+              jsonObject = resultsArray.getJSONObject(i);
+              batchOperations.add(buildBatchOperation(jsonObject));
+            }
+          }
+        }
+      }
+    } catch (JSONException e){
+      Log.e(LOG_TAG, "String to JSON failed: " + e);
+    }
+
+    return batchOperations;
+  }
+
   public static String truncateBidPrice(String bidPrice){
     bidPrice = String.format("%.2f", Float.parseFloat(bidPrice));
     return bidPrice;
@@ -93,4 +125,6 @@ public class Utils {
     }
     return builder.build();
   }
+
+
 }
