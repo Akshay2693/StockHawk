@@ -19,6 +19,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -31,6 +32,7 @@ import hnmn3.mechanic.optimist.stockhawk.R;
 import hnmn3.mechanic.optimist.stockhawk.data.HistoryColumns;
 import hnmn3.mechanic.optimist.stockhawk.data.QuoteColumns;
 import hnmn3.mechanic.optimist.stockhawk.data.QuoteProvider;
+import hnmn3.mechanic.optimist.stockhawk.graph.GraphActivity;
 import hnmn3.mechanic.optimist.stockhawk.rest.QuoteCursorAdapter;
 import hnmn3.mechanic.optimist.stockhawk.rest.RecyclerViewItemClickListener;
 import hnmn3.mechanic.optimist.stockhawk.rest.Utils;
@@ -90,6 +92,10 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
                     public void onItemClick(View v, int position) {
                         //TODO:
                         // do something on item click
+                        Intent i = new Intent(MyStocksActivity.this, GraphActivity.class);
+                        TextView tvstock_symbol = (TextView) v.findViewById(R.id.stock_symbol);
+                        i.putExtra("stock_symbol",tvstock_symbol.getText().toString());
+                        startActivity(i);
                     }
                 }));
         recyclerView.setAdapter(mCursorAdapter);
