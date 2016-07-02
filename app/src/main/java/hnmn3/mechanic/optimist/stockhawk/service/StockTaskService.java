@@ -135,9 +135,8 @@ public class StockTaskService extends GcmTaskService{
               Utils.quoteJsonToContentVals(getResponse));
 
           //for past 30 days data
-         // mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY,Utils.quoteJsonToContentValsPast(historicaldata));
+          mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY,Utils.quoteJsonToContentValsPast(historicaldata));
 
-          //For
         }catch (RemoteException | OperationApplicationException e){
           Log.e(LOG_TAG, "Error applying batch insert", e);
         }catch(NumberFormatException e){
