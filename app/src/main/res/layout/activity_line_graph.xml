@@ -14,7 +14,7 @@
             android:id="@+id/chart1"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:contentDescription="Graph for past 1 month stock"
+            android:contentDescription="@string/contentDescription_lineChart"
             android:padding="20dp" />
 
         <LinearLayout
@@ -30,9 +30,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:contentDescription="Symbol"
+                android:contentDescription="@string/contentDescription_symbol"
                 android:gravity="center"
-                android:text="Symbol :      "
+                android:text="@string/contentDescription_symbolLable"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
@@ -56,9 +56,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:contentDescription="Date"
+                android:contentDescription="@string/contentDescription_date1"
                 android:gravity="center"
-                android:text="Date :           "
+                android:text="@string/contentDescription_date"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
@@ -83,9 +83,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:contentDescription="Open"
+                android:contentDescription="@string/contentDescription_open"
                 android:gravity="center"
-                android:text="Open :          "
+                android:text="@string/contentDescription_openLable"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
@@ -109,9 +109,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:contentDescription="Close"
+                android:contentDescription="@string/contentDescription_close"
                 android:gravity="center"
-                android:text="Close :         "
+                android:text="@string/contentDescription_closeLable"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
@@ -135,9 +135,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:contentDescription="High"
+                android:contentDescription="@string/contentDescription_high"
                 android:gravity="center"
-                android:text="High  :          "
+                android:text="@string/contentDescription_highLable"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
@@ -161,9 +161,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:contentDescription="Low"
+                android:contentDescription="@string/contentDescription_low"
                 android:gravity="center"
-                android:text="Low  :          "
+                android:text="@string/contentDescription_lowLable"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView

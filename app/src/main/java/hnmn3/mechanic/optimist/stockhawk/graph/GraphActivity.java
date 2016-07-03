@@ -35,7 +35,6 @@ public class GraphActivity extends FragmentActivity {
     String dates[];
     float close[];
     Intent intentReceived;
-    private CustomMarkerView markerView;
     private ArrayList<GraphPoint> graphPoints = new ArrayList<>();
     LineDataSet set1 = new LineDataSet(new ArrayList<Entry>(),"Values");
     TextView tvSymbol,tvDate,tvOpen,tvClose,tvHigh,tvLow;
@@ -91,18 +90,23 @@ public class GraphActivity extends FragmentActivity {
 
         mChart.animateXY(2000, 2000);
 
-        List<ILineDataSet> sets = mChart.getData()
-                .getDataSets();
+        try{
+            List<ILineDataSet> sets = mChart.getData()
+                    .getDataSets();
+            for (ILineDataSet iSet : sets) {
 
-        for (ILineDataSet iSet : sets) {
-
-            LineDataSet set = (LineDataSet) iSet;
-            set.setMode(LineDataSet.Mode.LINEAR);
-            set.setDrawCircles(true);
-            set.setDrawValues(false);
+                LineDataSet set = (LineDataSet) iSet;
+                set.setMode(LineDataSet.Mode.LINEAR);
+                set.setDrawCircles(true);
+                set.setDrawValues(false);
+            }
+        }catch (NullPointerException e){
+            Toast.makeText(GraphActivity.this, "No data available, Please wait..", Toast.LENGTH_SHORT).show();
+            finish();
         }
 
         // add MarkerView to show each Graph point details
+        CustomMarkerView markerView;
         markerView = new CustomMarkerView(this,R.layout.markerview_layout);
         mChart.setMarkerView(markerView);
 
@@ -135,6 +139,7 @@ public class GraphActivity extends FragmentActivity {
                 graphPoints.add(graphPoint);
                 i++;
             }while(c.moveToNext());
+            c.close();
         }else{
             Toast.makeText(GraphActivity.this, "No data Available in Database :(", Toast.LENGTH_SHORT).show();
         }

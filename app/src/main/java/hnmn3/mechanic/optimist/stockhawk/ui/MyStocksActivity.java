@@ -29,7 +29,6 @@ import com.google.android.gms.gcm.Task;
 import com.melnykov.fab.FloatingActionButton;
 
 import hnmn3.mechanic.optimist.stockhawk.R;
-import hnmn3.mechanic.optimist.stockhawk.data.HistoryColumns;
 import hnmn3.mechanic.optimist.stockhawk.data.QuoteColumns;
 import hnmn3.mechanic.optimist.stockhawk.data.QuoteProvider;
 import hnmn3.mechanic.optimist.stockhawk.graph.GraphActivity;
@@ -200,23 +199,23 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-/*      ContentValues cv = new ContentValues();
+       /* if (id == R.id.action_settings) {
+*//*      ContentValues cv = new ContentValues();
       cv.put(HistoryColumns.SYMBOL,"YOYO" );
-      *//*cv.put(HistoryColumns.Adj_Close, );
+      *//**//*cv.put(HistoryColumns.Adj_Close, );
       cv.put(HistoryColumns.Close, );
       cv.put(HistoryColumns.Date, );
       cv.put(HistoryColumns.High, );
       cv.put(HistoryColumns.Low, );
       cv.put(HistoryColumns.Open, );
-      cv.put(HistoryColumns.Volume, );*//*
-      mContext.getContentResolver().insert(QuoteProvider.HISTORY.CONTENT_URI,cv);*/
+      cv.put(HistoryColumns.Volume, );*//**//*
+      mContext.getContentResolver().insert(QuoteProvider.HISTORY.CONTENT_URI,cv);*//*
             Cursor c = mContext.getContentResolver().query(QuoteProvider.HISTORY.CONTENT_URI,
                     null, HistoryColumns.SYMBOL + " = \"YOYO\" ", null, null);
             c.moveToFirst();
             Toast.makeText(MyStocksActivity.this, c.getString(1), Toast.LENGTH_SHORT).show();
             return true;
-        }
+        }*/
 
         if (id == R.id.action_change_units) {
             // this is for changing stock changes from percent value to dollar value
