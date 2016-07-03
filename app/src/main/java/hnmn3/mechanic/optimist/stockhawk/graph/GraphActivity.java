@@ -53,7 +53,7 @@ public class GraphActivity extends FragmentActivity {
         tvHigh = (TextView) findViewById(R.id.tvHigh);
         tvLow = (TextView) findViewById(R.id.tvLow);
         intentReceived = getIntent();
-        tvSymbol.setText(intentReceived.getStringExtra("stock_symbol"));
+        //tvSymbol.setText(intentReceived.getStringExtra("stock_symbol"));
 
         mChart = (LineChart) findViewById(R.id.chart1);
         mChart.setViewPortOffsets(20, 20 , 20, 20);
@@ -204,6 +204,7 @@ public class GraphActivity extends FragmentActivity {
             tvHigh.setText(graphPoint.getHigh());
             tvLow.setText(graphPoint.getLow());
             tvOpen.setText(graphPoint.getOpen());
+            tvSymbol.setText(graphPoint.getSymbol());
         }
 
         @Override

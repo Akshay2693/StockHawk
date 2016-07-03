@@ -7,33 +7,33 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/chart1"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:layout_above="@+id/seekBar1"
-            android:padding="20dp"
-            android:contentDescription="Graph for past 1 month stock" />
+            android:contentDescription="Graph for past 1 month stock"
+            android:padding="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/textView3sd"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
+                android:contentDescription="Symbol"
                 android:gravity="center"
                 android:text="Symbol :      "
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:contentDescription="Symbol" />
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/tvSymbol"
@@ -56,10 +56,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
+                android:contentDescription="Date"
                 android:gravity="center"
                 android:text="Date :           "
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:contentDescription="Date" />
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/tvDate"
@@ -68,6 +68,7 @@
                 android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,10 +83,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
+                android:contentDescription="Open"
                 android:gravity="center"
                 android:text="Open :          "
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:contentDescription="Open" />
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/tvOpen"
@@ -108,10 +109,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
+                android:contentDescription="Close"
                 android:gravity="center"
                 android:text="Close :         "
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:contentDescription="Close" />
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/tvClose"
@@ -134,10 +135,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
+                android:contentDescription="High"
                 android:gravity="center"
                 android:text="High  :          "
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:contentDescription="High" />
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/tvHigh"
@@ -160,10 +161,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
+                android:contentDescription="Low"
                 android:gravity="center"
                 android:text="Low  :          "
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:contentDescription="Low" />
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/tvLow"
