@@ -4,14 +4,14 @@
     xmlns:fab="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:contentDescription="List of Companies">
 
   <android.support.v7.widget.RecyclerView
       android:id="@+id/recycler_view"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:background="@color/colorPrimaryLight"
-      />
+      android:contentDescription="List of Companies" />
 
   <com.melnykov.fab.FloatingActionButton
       android:id="@+id/fab"
@@ -27,5 +27,6 @@
       fab:fab_type="normal"
       fab:layout_anchor="recycler_view"
       fab:layout_anchorGravity="bottom | end"
-      android:backgroundTint="@color/colorPrimaryDark" />
+      android:backgroundTint="@color/colorPrimaryDark"
+      android:contentDescription="Click here to add new symbol" />
 </FrameLayout>

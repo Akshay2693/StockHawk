@@ -16,7 +16,8 @@
         android:layout_height="wrap_content"
         android:gravity="left|center_vertical"
         android:textColor="@android:color/black"
-        tools:text="GOOG" />
+        tools:text="GOOG"
+        android:contentDescription="Stock symbol of company" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -31,7 +32,8 @@
             android:layout_height="wrap_content"
             android:paddingRight="10sp"
             android:textColor="@android:color/black"
-            tools:text="1000.00" />
+            tools:text="1000.00"
+            android:contentDescription="Bid proce" />
 
         <TextView
             android:id="@+id/change"
@@ -41,6 +43,7 @@
             android:background="@drawable/percent_change_pill"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
-            tools:text="100%" />
+            tools:text="100%"
+            android:contentDescription="Change " />
     </LinearLayout>
 </LinearLayout>
