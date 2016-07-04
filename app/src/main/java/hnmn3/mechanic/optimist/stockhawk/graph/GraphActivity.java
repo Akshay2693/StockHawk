@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.widget.TextView;
@@ -28,6 +30,7 @@ import hnmn3.mechanic.optimist.stockhawk.R;
 import hnmn3.mechanic.optimist.stockhawk.data.HistoryColumns;
 import hnmn3.mechanic.optimist.stockhawk.data.QuoteColumns;
 import hnmn3.mechanic.optimist.stockhawk.data.QuoteProvider;
+import hnmn3.mechanic.optimist.stockhawk.service.StockIntentService;
 
 public class GraphActivity extends FragmentActivity {
 
@@ -101,7 +104,8 @@ public class GraphActivity extends FragmentActivity {
                 set.setDrawValues(false);
             }
         }catch (NullPointerException e){
-            Toast.makeText(GraphActivity.this, "No data available, Please wait..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(GraphActivity.this, this.getString(R.string.No_data_available), Toast.LENGTH_SHORT).show();
+            getDataFromInternet();
             finish();
         }
 
@@ -111,6 +115,22 @@ public class GraphActivity extends FragmentActivity {
         mChart.setMarkerView(markerView);
 
         mChart.invalidate();
+    }
+
+    void getDataFromInternet(){
+        ConnectivityManager cm =
+                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        Intent mServiceIntent = new Intent(this, StockIntentService.class);
+        if (isConnected) {
+            mServiceIntent.putExtra("tag", "init");
+            startService(mServiceIntent);
+        } else {
+            Toast.makeText(this, getString(R.string.network_toast), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private  void getData(){
@@ -140,10 +160,9 @@ public class GraphActivity extends FragmentActivity {
                 i++;
             }while(c.moveToNext());
             c.close();
-        }else{
-            Toast.makeText(GraphActivity.this, "No data Available in Database :(", Toast.LENGTH_SHORT).show();
         }
     }
+
 
 
 

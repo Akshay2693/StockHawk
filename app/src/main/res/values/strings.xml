@@ -25,7 +25,7 @@
     <string name="contentDescription_lowLable">Low :</string>
     <string name="input_prefill" />
     <string name="empty_view_text">Oops !! No data available ...</string>
-    <string name="No_data_available">No data available</string>
+    <string name="No_data_available">No data available, Please wait while fatching data from Internet..</string>
     <string name="invalid_cursor">This should only be called when Cursor is valid</string>
     <string name="BroadcastIntent_Constant">hnmn3.mechanic.optimist.stockhawk.widget.Update</string>
     <string name="Stock_symbol_not_exist">Stock Symbol does not Exist!!</string>
