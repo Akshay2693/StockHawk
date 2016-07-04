@@ -52,10 +52,6 @@ public class WidgetProvider extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
         if (intent.getAction().equals("hnmn3.mechanic.optimist.stockhawk.widget.Update")) {
-            /*int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                    AppWidgetManager.INVALID_APPWIDGET_ID);
-            String symbol = intent.getStringExtra("hnmn3.mechanic.optimist.stockhawk.widget.ExtraItem");
-            Toast.makeText(context, "Touched view " + symbol, Toast.LENGTH_SHORT).show();*/
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, getClass()));
             // update All Widgets

@@ -149,14 +149,11 @@ public class GraphActivity extends FragmentActivity {
 
     private void setData(String[] dates, float[] yAxisValues) {
 
-        //ArrayList<Entry> yVals = new ArrayList<Entry>();
-        LineDataSet yVals = new LineDataSet(new ArrayList<Entry>(),"Values");
-
         int len=0;
         if(yAxisValues!=null)
         len = yAxisValues.length;
         else{
-            Toast.makeText(GraphActivity.this, "No data available", Toast.LENGTH_SHORT).show();;
+            Toast.makeText(GraphActivity.this, R.string.No_data_available, Toast.LENGTH_SHORT).show();;
             return;
         }
         for (int i = 0; i < len; i++) {

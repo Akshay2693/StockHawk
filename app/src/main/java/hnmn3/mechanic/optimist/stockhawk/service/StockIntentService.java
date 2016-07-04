@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.gcm.TaskParams;
 
+import hnmn3.mechanic.optimist.stockhawk.R;
+
 
 public class StockIntentService extends IntentService {
 
@@ -43,7 +45,7 @@ public class StockIntentService extends IntentService {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getBaseContext(), "Stock Symbol does not Exist!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), R.string.Stock_symbol_not_exist, Toast.LENGTH_LONG).show();
                 }
             });
         }

@@ -38,7 +38,7 @@ class WidgetItemRemoteView implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public void onCreate() {
-        //nothing to do
+        //What should i do here ? :P
     }
 
     @Override
@@ -65,13 +65,13 @@ class WidgetItemRemoteView implements RemoteViewsService.RemoteViewsFactory {
             cursor.moveToPosition(position);
             int priceChangeColorId;
 
-            // get Stock Quote information
+            // get Stock Quote information from the cursor
             String stockSymbol = cursor.getString(cursor.getColumnIndex(QuoteColumns.SYMBOL));
             String stockBidPrice = cursor.getString(cursor.getColumnIndex(QuoteColumns.BIDPRICE));
             String stockPriceChange = cursor.getString(cursor.getColumnIndex(QuoteColumns.CHANGE));
             int isUp = cursor.getInt(cursor.getColumnIndex(QuoteColumns.ISUP));
 
-            // create List Item for Widget ListView
+            // create List Item View for Widget ListView
             listItemRemoteView = new RemoteViews(context.getPackageName(), R.layout.widget_list_item);
             listItemRemoteView.setTextViewText(R.id.stock_symbol, stockSymbol);
             listItemRemoteView.setTextViewText(R.id.bid_price, stockBidPrice);

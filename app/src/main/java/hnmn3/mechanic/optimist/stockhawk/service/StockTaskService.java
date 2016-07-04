@@ -2,6 +2,7 @@ package hnmn3.mechanic.optimist.stockhawk.service;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.OperationApplicationException;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
@@ -22,6 +23,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import hnmn3.mechanic.optimist.stockhawk.R;
 import hnmn3.mechanic.optimist.stockhawk.data.QuoteColumns;
 import hnmn3.mechanic.optimist.stockhawk.data.QuoteProvider;
 import hnmn3.mechanic.optimist.stockhawk.rest.Utils;
@@ -141,6 +143,11 @@ public class StockTaskService extends GcmTaskService {
                         mContext.getContentResolver().delete(QuoteProvider.HISTORY.CONTENT_URI, null, null);
                         mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY, Utils.quoteJsonToContentValsPast(historicaldata));
                     }
+
+                    // sending broadcast so Widget can Update data
+                    Intent broadcastIntent = new Intent(mContext.getString(R.string.BroadcastIntent_Constant))
+                            .setPackage(mContext.getPackageName());
+                    mContext.sendBroadcast(broadcastIntent);
 
                 } catch (RemoteException | OperationApplicationException e) {
                     Log.e(LOG_TAG, "Error applying batch insert", e);

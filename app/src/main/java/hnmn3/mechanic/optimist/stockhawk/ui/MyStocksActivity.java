@@ -198,25 +198,6 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-       /* if (id == R.id.action_settings) {
-*//*      ContentValues cv = new ContentValues();
-      cv.put(HistoryColumns.SYMBOL,"YOYO" );
-      *//**//*cv.put(HistoryColumns.Adj_Close, );
-      cv.put(HistoryColumns.Close, );
-      cv.put(HistoryColumns.Date, );
-      cv.put(HistoryColumns.High, );
-      cv.put(HistoryColumns.Low, );
-      cv.put(HistoryColumns.Open, );
-      cv.put(HistoryColumns.Volume, );*//**//*
-      mContext.getContentResolver().insert(QuoteProvider.HISTORY.CONTENT_URI,cv);*//*
-            Cursor c = mContext.getContentResolver().query(QuoteProvider.HISTORY.CONTENT_URI,
-                    null, HistoryColumns.SYMBOL + " = \"YOYO\" ", null, null);
-            c.moveToFirst();
-            Toast.makeText(MyStocksActivity.this, c.getString(1), Toast.LENGTH_SHORT).show();
-            return true;
-        }*/
-
         if (id == R.id.action_change_units) {
             // this is for changing stock changes from percent value to dollar value
             Utils.showPercent = !Utils.showPercent;
