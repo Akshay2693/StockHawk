@@ -17,6 +17,11 @@
    * Handle error cases in Android.
    * Add a widget to the app .
    * Leverage the functionality of a library in your app.
+ 
+
+![alt tag](https://github.com/Gr8manish/StockHawk/blob/master/Screenshots/StockHawk1.png "Stock Hawk") ![alt tag](https://github.com/Gr8manish/StockHawk/blob/master/Screenshots/StockHawk2.png "Stock Hawk")
+![alt tag](https://github.com/Gr8manish/StockHawk/blob/master/Screenshots/StockHawk3.png "Stock Hawk") ![alt tag](https://github.com/Gr8manish/StockHawk/blob/master/Screenshots/StockHawk4.png "Stock Hawk")
+   
 
 
 
