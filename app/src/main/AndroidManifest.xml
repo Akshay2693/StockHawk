@@ -50,7 +50,7 @@
             android:label="Stock Hawk">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
-                <action android:name="com.example.sam_chordas.stockhawk.STOCK_DATA_UPDATE"/>
+                <action android:name="hnmn3.mechanic.optimist.stockhawk.widget.TOAST" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
@@ -58,8 +58,7 @@
                 />
         </receiver>
         <service android:name=".widget.StockWidgetService"
-            android:enabled="true"
-            android:exported="true"
+            android:exported="false"
             android:permission="android.permission.BIND_REMOTEVIEWS">
         </service>
         <activity android:name=".graph.GraphActivity"></activity>

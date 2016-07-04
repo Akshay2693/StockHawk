@@ -17,8 +17,21 @@
         android:paddingEnd="64dp"
         android:paddingRight="64dp"
         android:backgroundTint="@color/colorPrimary" />
+
     <ListView
         android:id="@+id/widget_list_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryLight" />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:text="@string/empty_view_text"
+        android:textSize="20sp" />
+
 </LinearLayout>

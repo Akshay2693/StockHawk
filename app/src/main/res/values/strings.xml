@@ -24,4 +24,5 @@
     <string name="contentDescription_low">Low</string>
     <string name="contentDescription_lowLable">Low :</string>
     <string name="input_prefill" />
+    <string name="empty_view_text">Oops !! No data available ...</string>
 </resources>

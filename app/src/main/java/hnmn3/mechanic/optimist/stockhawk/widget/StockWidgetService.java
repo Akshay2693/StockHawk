@@ -1,5 +1,6 @@
 package hnmn3.mechanic.optimist.stockhawk.widget;
 
+import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,9 +17,6 @@ import hnmn3.mechanic.optimist.stockhawk.data.QuoteProvider;
  */
 public class StockWidgetService extends RemoteViewsService {
 
-    public StockWidgetService() {
-    }
-
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
         return new WidgetItemRemoteView(this.getApplicationContext(), intent);
@@ -29,27 +27,18 @@ class WidgetItemRemoteView implements RemoteViewsService.RemoteViewsFactory {
     Context context;
     Cursor cursor;
     Intent mIntent;
+    private int mAppWidgetId;
 
     public WidgetItemRemoteView(Context mContext, Intent mIntent) {
         this.context = mContext;
         this.mIntent = mIntent;
+        mAppWidgetId = mIntent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+                AppWidgetManager.INVALID_APPWIDGET_ID);
     }
 
     @Override
     public void onCreate() {
-        if (cursor != null)
-            cursor.close();
-
-        final long pId = Binder.clearCallingIdentity();
-
-        cursor = context.getContentResolver().query(
-                QuoteProvider.Quotes.CONTENT_URI,
-                null,
-                QuoteColumns.ISCURRENT + " = ?",
-                new String[]{"1"},
-                null
-        );
-        Binder.restoreCallingIdentity(pId);
+        //nothing to do
     }
 
     @Override
@@ -71,7 +60,7 @@ class WidgetItemRemoteView implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public RemoteViews getViewAt(int position) {
-        RemoteViews listItemRemoteView = null;
+        RemoteViews listItemRemoteView=null;
         try {
             cursor.moveToPosition(position);
             int priceChangeColorId;
@@ -84,11 +73,11 @@ class WidgetItemRemoteView implements RemoteViewsService.RemoteViewsFactory {
 
             // create List Item for Widget ListView
             listItemRemoteView = new RemoteViews(context.getPackageName(), R.layout.widget_list_item);
-            listItemRemoteView.setTextViewText(R.id.stock_symbol, stockSymbol + "");
-            listItemRemoteView.setTextViewText(R.id.bid_price, stockBidPrice + "");
-            listItemRemoteView.setTextViewText(R.id.change, stockPriceChange + "");
+            listItemRemoteView.setTextViewText(R.id.stock_symbol, stockSymbol);
+            listItemRemoteView.setTextViewText(R.id.bid_price, stockBidPrice);
+            listItemRemoteView.setTextViewText(R.id.change, stockPriceChange);
 
-            // if stock price is Up then background of price Change is Green else Red
+            // if stock price is Up then background of price Change is Green else, Red
             if (isUp == 1)
                 priceChangeColorId = R.drawable.percent_change_pill_green;
             else
@@ -96,12 +85,14 @@ class WidgetItemRemoteView implements RemoteViewsService.RemoteViewsFactory {
             listItemRemoteView.setInt(R.id.change, "setBackgroundResource", priceChangeColorId);
 
             // set Onclick Item Intent
-            Intent onClickItemIntent = new Intent();
-            onClickItemIntent.putExtra("clicked_position", position + "");
-            listItemRemoteView.setOnClickFillInIntent(R.id.list_item_stock_quote, onClickItemIntent);
+            /*Bundle extras = new Bundle();
+            extras.putInt("hnmn3.mechanic.optimist.stockhawk.widget.ExtraItem", position);
+            Intent fillInIntent = new Intent();
+            fillInIntent.putExtras(extras);
+            listItemRemoteView.setOnClickFillInIntent(R.id.widget_list_linear_Layout, fillInIntent);*/
+            return listItemRemoteView;
         } catch (Exception e) {
             e.printStackTrace();
-
         }
         return listItemRemoteView;
     }
@@ -113,17 +104,17 @@ class WidgetItemRemoteView implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public int getViewTypeCount() {
-        return 0;
+        return 1;
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public boolean hasStableIds() {
-        return false;
+        return true;
     }
 
     @Override
@@ -134,7 +125,7 @@ class WidgetItemRemoteView implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public int getCount() {
-        return 0;
+        return cursor!=null?cursor.getCount():0;
     }
 
 }
