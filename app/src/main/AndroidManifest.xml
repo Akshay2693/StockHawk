@@ -50,7 +50,7 @@
             android:label="Stock Hawk">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
-                <action android:name="hnmn3.mechanic.optimist.stockhawk.widget.TOAST" />
+                <action android:name="hnmn3.mechanic.optimist.stockhawk.widget.Update" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"

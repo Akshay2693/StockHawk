@@ -85,11 +85,9 @@ class WidgetItemRemoteView implements RemoteViewsService.RemoteViewsFactory {
             listItemRemoteView.setInt(R.id.change, "setBackgroundResource", priceChangeColorId);
 
             // set Onclick Item Intent
-            /*Bundle extras = new Bundle();
-            extras.putInt("hnmn3.mechanic.optimist.stockhawk.widget.ExtraItem", position);
             Intent fillInIntent = new Intent();
-            fillInIntent.putExtras(extras);
-            listItemRemoteView.setOnClickFillInIntent(R.id.widget_list_linear_Layout, fillInIntent);*/
+            fillInIntent.putExtra("stock_symbol", stockSymbol);
+            listItemRemoteView.setOnClickFillInIntent(R.id.widget_list_linear_Layout, fillInIntent);
             return listItemRemoteView;
         } catch (Exception e) {
             e.printStackTrace();
