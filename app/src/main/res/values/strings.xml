@@ -29,4 +29,6 @@
     <string name="invalid_cursor">This should only be called when Cursor is valid</string>
     <string name="BroadcastIntent_Constant">hnmn3.mechanic.optimist.stockhawk.widget.Update</string>
     <string name="Stock_symbol_not_exist">Stock Symbol does not Exist!!</string>
+    <string name="could_not_move_cursor">"Could not move Cursor to position: "</string>
+    <string name="stock_already_exist">This stock already saved!</string>
 </resources>
