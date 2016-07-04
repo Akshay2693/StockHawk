@@ -10,7 +10,7 @@ android {
         applicationId "hnmn3.mechanic.optimist.stockhawk"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 6
+        versionCode 8
         versionName "1.0"
     }
     buildTypes {
