@@ -16,6 +16,8 @@
    * Handle error cases in Android.
    * Add a widget to the app .
    * Leverage the functionality of a library in your app.
+   * Used Yahoo finance API for all the stock data
+   * Used MPAndroidChart to implement Graphs
  
 
 ![alt tag](https://github.com/Gr8manish/StockHawk/blob/master/Screenshots/StockHawk1.png "Stock Hawk") ![alt tag](https://github.com/Gr8manish/StockHawk/blob/master/Screenshots/StockHawk2.png "Stock Hawk")
